@@ -1,0 +1,2 @@
+[API]
+DB_PATH="./db.sqlite"

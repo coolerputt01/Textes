@@ -1,12 +1,26 @@
-import sys
-import slint
+import flet as ft
 
-sys.path.append("ui")
+def main(page: ft.Page):
+    page.title = "Flet counter example"
+    page.vertical_alignment = ft.MainAxisAlignment.CENTER
 
-class App(slint.loader.window.AppWindow):
-    @slint.callback
-    def request_increase_value(self):
-        self.counter = self.counter + 1
+    input = ft.TextField(value="0", text_align=ft.TextAlign.RIGHT, width=100)
 
-app = App()
-app.run()
+    def minus_click(e):
+        input.value = str(int(input.value) - 1)
+
+    def plus_click(e):
+        input.value = str(int(input.value) + 1)
+
+    page.add(
+        ft.Row(
+            alignment=ft.MainAxisAlignment.CENTER,
+            controls=[
+                ft.IconButton(ft.Icons.REMOVE, on_click=minus_click),
+                input,
+                ft.IconButton(ft.Icons.ADD, on_click=plus_click),
+            ],
+        )
+    )
+
+ft.run(main)

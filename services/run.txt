@@ -1,0 +1,1 @@
+g++ main.cpp C:/sqlite/sqlite3.o -IC:/sqlite -LC:/sqlite -o builds/service.exe -static-libstdc++ -std=c++20 -Wno-deprecated-declarations
