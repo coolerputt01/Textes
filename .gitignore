@@ -1,5 +1,6 @@
 # Python
 pyenv/
+__pycache__/
 
 # CPP
 examples/

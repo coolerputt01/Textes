@@ -1,26 +1,19 @@
+from ui.views import index_view
 import flet as ft
 
 def main(page: ft.Page):
-    page.title = "Flet counter example"
-    page.vertical_alignment = ft.MainAxisAlignment.CENTER
+    page.fonts = {
+        "Pixel": "fonts/pixel.ttf"
+    }
+    def route_change():
+        if page.route == '/':
+            page.views.append(index_view)
+    
+        page.update()
+    
+    page.on_route_change = route_change
+    page.push_route('/')
 
-    input = ft.TextField(value="0", text_align=ft.TextAlign.RIGHT, width=100)
+    route_change()
 
-    def minus_click(e):
-        input.value = str(int(input.value) - 1)
-
-    def plus_click(e):
-        input.value = str(int(input.value) + 1)
-
-    page.add(
-        ft.Row(
-            alignment=ft.MainAxisAlignment.CENTER,
-            controls=[
-                ft.IconButton(ft.Icons.REMOVE, on_click=minus_click),
-                input,
-                ft.IconButton(ft.Icons.ADD, on_click=plus_click),
-            ],
-        )
-    )
-
-ft.run(main)
+ft.run(main,assets_dir="assets")
