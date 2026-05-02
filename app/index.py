@@ -1,6 +1,11 @@
-from ui.views import index_view,signup_view
 import flet as ft
 import asyncio
+
+from ui.views.index_view import index_view
+from ui.views.signup_view import signup_view
+from modules.services import services
+
+storage = None
 
 async def main(page: ft.Page):
     page.fonts = {
@@ -8,6 +13,7 @@ async def main(page: ft.Page):
     }
     async def load_app():
         await page.push_route("/signup")
+        storage = services.dbInit("./db.sqlite")
         page.update()
     
     async def route_change():
@@ -20,7 +26,8 @@ async def main(page: ft.Page):
         
         elif page.route == "/signup":
             page.views.clear()
-            page.views.append(signup_view())
+            if storage != None:
+                page.views.append(signup_view(storage=storage))
             page.update()
     
         page.update()

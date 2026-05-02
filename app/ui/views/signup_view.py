@@ -1,33 +1,7 @@
 import flet as ft
+from modules.services import services
 
-
-def index_view():
-    return ft.View(
-        route="/",
-        vertical_alignment=ft.MainAxisAlignment.CENTER,
-        horizontal_alignment=ft.CrossAxisAlignment.CENTER,
-        controls=[
-            ft.Column(
-                controls=[
-                    ft.Image(
-                        src="img/illustrations/blink.gif",
-                        width=200,
-                        filter_quality=ft.FilterQuality.HIGH,
-                        border_radius=10
-                    ),
-                    ft.Text(
-                        "Textes",
-                        font_family="Pixel",
-                        size=48,
-                        weight=ft.FontWeight.BOLD
-                    )
-                ],
-                horizontal_alignment=ft.CrossAxisAlignment.CENTER,
-            )
-        ]
-    )
-
-def signup_view():
+def signup_view(storage):
     return ft.View(
         route="/signup",
         vertical_alignment=ft.MainAxisAlignment.CENTER,
@@ -36,7 +10,7 @@ def signup_view():
             ft.Column(
                 controls=[
                     ft.Text("Enter Username",font_family="Pixel",size=10,text_align=ft.TextAlign.LEFT,color=ft.Colors.GREY_700),
-                    ft.TextField(
+                    username := ft.TextField(
                         value="",
                         text_align=ft.TextAlign.LEFT,
                         width=350,
@@ -50,13 +24,14 @@ def signup_view():
                     ft.Button(
                         content="Okay!",
                         width=360,
-                        margin=ft.margin.only(top=10),
+                        on_click=lambda _: services.createUser(storage, username.value, ""),
+                        margin=ft.Margin.only(top=10),
                         style=ft.ButtonStyle(
                             shape=ft.RoundedRectangleBorder(radius=20),
                             bgcolor={
-                                ft.ControlState.DEFAULT: ft.Colors.GREEN_200,
-                                ft.ControlState.HOVERED: ft.Colors.GREEN_400,
-                                ft.ControlState.PRESSED: ft.Colors.GREEN_600,
+                                ft.ControlState.DEFAULT: ft.Colors.GREEN_300,
+                                ft.ControlState.HOVERED: ft.Colors.GREEN_500,
+                                ft.ControlState.PRESSED: ft.Colors.GREEN_700,
                             },
                             color=ft.Colors.WHITE,
                             padding=ft.Padding(20, 10, 20, 10),
