@@ -1,2 +1,1 @@
-- g++ main.cpp C:/sqlite/sqlite3.o -IC:/sqlite -LC:/sqlite -o builds/service.exe -static-libstdc++ -std=c++20 -Wno-deprecated-declarations
-- g++ -O3 -Wall -shared -fPIC main.cpp C:/sqlite/sqlite3.o -IC:/sqlite -LC:/sqlite -IC:\Users\Coolerputt\AppData\Local\Programs\Python\Python313\include -LC:\Users\Coolerputt\AppData\Local\Programs\Python\Python313\libs -LC:\Users\Coolerputt\AppData\Local\Programs\Python\Python313\Lib -o modules/services.pyd -static-libstdc++ -static-libgcc -lwinpthread  -lpython313 -std=c++20 -Wno-deprecated-declarations
+python main.py

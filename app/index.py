@@ -3,11 +3,11 @@ import asyncio
 
 from ui.views.index_view import index_view
 from ui.views.signup_view import signup_view
-from modules.services import services
+from services.main import main
 
 storage = None
 
-async def main(page: ft.Page):
+async def run(page: ft.Page):
     page.fonts = {
         "Pixel": "fonts/pixel.ttf"
     }
@@ -38,4 +38,6 @@ async def main(page: ft.Page):
 
     await route_change()
 
-ft.run(main,assets_dir="assets")
+if __name__ =="__main__":
+    main()
+    ft.run(run,assets_dir="assets")

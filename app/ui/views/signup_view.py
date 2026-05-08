@@ -1,7 +1,19 @@
 import flet as ft
-from modules.services import services
+
+import sys, os
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)) + "/../../..")
+from services.auth.auth import create_user
 
 def signup_view(storage):
+    def handle_signup(e):
+        result = create_user(
+            username.value.encode("utf-8")
+            )
+        if result == 0:
+            print("User created")
+        else:
+            print("Username taken or invalid")
+
     return ft.View(
         route="/signup",
         vertical_alignment=ft.MainAxisAlignment.CENTER,
@@ -24,7 +36,7 @@ def signup_view(storage):
                     ft.Button(
                         content="Okay!",
                         width=360,
-                        on_click=lambda _: services.createUser(storage, username.value, ""),
+                        on_click=handle_signup,
                         margin=ft.Margin.only(top=10),
                         style=ft.ButtonStyle(
                             shape=ft.RoundedRectangleBorder(radius=20),
