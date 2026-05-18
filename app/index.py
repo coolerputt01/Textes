@@ -3,9 +3,9 @@ import asyncio
 
 from ui.views.index_view import index_view
 from ui.views.signup_view import signup_view
-from services.main import main
+from services.db_handler import db_init
 
-storage = None
+app_state = {"storage": None}
 
 async def run(page: ft.Page):
     page.fonts = {
@@ -13,7 +13,7 @@ async def run(page: ft.Page):
     }
     async def load_app():
         await page.push_route("/signup")
-        storage = services.dbInit("./db.sqlite")
+        app_state["storage"] = db_init("./db.sqlite")
         page.update()
     
     async def route_change():
@@ -26,18 +26,16 @@ async def run(page: ft.Page):
         
         elif page.route == "/signup":
             page.views.clear()
-            if storage != None:
-                page.views.append(signup_view(storage=storage))
+            page.views.append(signup_view(storage=app_state["storage"]))
             page.update()
     
         page.update()
     
     page.on_route_change = route_change
-    page.push_route('/')
+    await page.push_route('/')
     
 
     await route_change()
 
 if __name__ =="__main__":
-    main()
-    ft.run(run,assets_dir="assets")
+    ft.run(run,assets_dir="assets",port=8080,web_renderer=ft.WebRenderer.CANVAS_KIT)
