@@ -1,13 +1,14 @@
 import flet as ft
 
 import sys, os
+from ..components.loading_circler import LoadingButton
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)) + "/../../..")
 from services.auth.auth import create_user
 
 def signup_view(storage):
     def handle_signup(e):
         result = create_user(
-            username.value.encode("utf-8")
+            username=username.value.encode("utf-8")
             )
         if result == 0:
             print("User created")
@@ -33,25 +34,10 @@ def signup_view(storage):
                             size=14
                         ),
                     ),
-                    ft.Button(
+                    LoadingButton(
                         content="Okay!",
                         width=360,
-                        on_click=handle_signup,
-                        margin=ft.Margin.only(top=10),
-                        style=ft.ButtonStyle(
-                            shape=ft.RoundedRectangleBorder(radius=20),
-                            bgcolor={
-                                ft.ControlState.DEFAULT: ft.Colors.GREEN_300,
-                                ft.ControlState.HOVERED: ft.Colors.GREEN_500,
-                                ft.ControlState.PRESSED: ft.Colors.GREEN_700,
-                            },
-                            color=ft.Colors.WHITE,
-                            padding=ft.Padding(20, 10, 20, 10),
-                            text_style=ft.TextStyle(
-                                font_family="Pixel",
-                                size=12
-                            ),
-                        ),
+                        on_click=handle_signup
                     )
                 ]
             )
